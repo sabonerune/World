@@ -9,7 +9,7 @@
 #     target_link_librairies command) inherits from the library PUBLIC include
 #     directories and not from the PRIVATE ones.
 
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.0...3.20)
 
 # Build Options
 option(WORLD_BUILD_TESTS "Set to ON to build tests" OFF)
@@ -71,7 +71,7 @@ target_link_libraries(world_tool PUBLIC world)
 
 foreach (lib world world_tool)
     target_include_directories(${lib} PUBLIC $<INSTALL_INTERFACE:include>
-            $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> PRIVATE src)
+            $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>)
     set_target_properties(${lib}
             PROPERTIES
             ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
