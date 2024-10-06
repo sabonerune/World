@@ -9,7 +9,7 @@
 #     target_link_librairies command) inherits from the library PUBLIC include
 #     directories and not from the PRIVATE ones.
 
-cmake_minimum_required(VERSION 3.0...3.20)
+cmake_minimum_required(VERSION 3.1...3.20)
 
 # Build Options
 option(WORLD_BUILD_TESTS "Set to ON to build tests" OFF)
@@ -55,6 +55,8 @@ add_library(world STATIC
         src/stonemask.cpp
         src/synthesis.cpp
         src/synthesisrealtime.cpp
+        src/world/random_generator.hpp
+        src/random_generator.cpp
         )
 
 add_library(world_tool STATIC
