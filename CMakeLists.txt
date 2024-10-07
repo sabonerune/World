@@ -14,6 +14,7 @@ cmake_minimum_required(VERSION 3.1...3.20)
 # Build Options
 option(WORLD_BUILD_TESTS "Set to ON to build tests" OFF)
 option(WORLD_BUILD_EXAMPLES "Set to ON to build examples" ON)
+option(WORLD_MODIFIED_ENABLE_TESTS "Set to ON to enable tests for modified" OFF)
 
 # use git version as library version
 find_package(Git QUIET)
@@ -126,4 +127,9 @@ endif ()
 
 if(WORLD_BUILD_EXAMPLES)
     add_subdirectory(examples)
+endif()
+
+if(WORLD_MODIFIED_ENABLE_TESTS)
+    enable_testing()
+    add_subdirectory(test_modified)
 endif()
