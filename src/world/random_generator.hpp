@@ -18,8 +18,9 @@ class RandomGenerator {
 
  public:
   RandomGenerator();
-  ~RandomGenerator();
+  ~RandomGenerator() = default;
   double operator()();
+  void reseed();
 };
 }  // namespace internal
 }  // namespace  modified

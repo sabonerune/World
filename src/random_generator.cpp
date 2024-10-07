@@ -9,19 +9,9 @@ SPDX-License-Identifier: 0BSD
 using namespace world::modified::internal;
 
 RandomGenerator::RandomGenerator() {
-  //-----------------------------------------------------------------------------
-  // Copyright 2012 Masanori Morise
-  // Author: mmorise [at] meiji.ac.jp (Masanori Morise)
-  //-----------------------------------------------------------------------------
-  // this code copy from ../matlabfunctions.cpp
-  g_randn_x = 123456789;
-  g_randn_y = 362436069;
-  g_randn_z = 521288629;
-  g_randn_w = 88675123;
-  //-----------------------------------------------------------------------------
+  reseed();
 };
-RandomGenerator::~RandomGenerator() {};
-double RandomGenerator::operator()() {
+auto RandomGenerator::operator()() -> double {
   //-----------------------------------------------------------------------------
   // Copyright 2012 Masanori Morise
   // Author: mmorise [at] meiji.ac.jp (Masanori Morise)
@@ -46,3 +36,15 @@ double RandomGenerator::operator()() {
   return tmp / 268435456.0 - 6.0;
   //-----------------------------------------------------------------------------
 };
+void RandomGenerator::reseed() {
+  //-----------------------------------------------------------------------------
+  // Copyright 2012 Masanori Morise
+  // Author: mmorise [at] meiji.ac.jp (Masanori Morise)
+  //-----------------------------------------------------------------------------
+  // this code copy from ../matlabfunctions.cpp
+  g_randn_x = 123456789;
+  g_randn_y = 362436069;
+  g_randn_z = 521288629;
+  g_randn_w = 88675123;
+  //-----------------------------------------------------------------------------
+}
