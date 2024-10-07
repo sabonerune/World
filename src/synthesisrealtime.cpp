@@ -14,6 +14,10 @@
 //          different from the implementation in synthesis.cpp. The sound
 //          quality is almost all the same in both implementations.
 //-----------------------------------------------------------------------------
+/*
+SPDX-FileCopyrightText: (c) 2024, sabonerune
+SPDX-License-Identifier: 0BSD
+*/
 #include "world/synthesisrealtime.h"
 
 #include <math.h>
@@ -22,14 +26,17 @@
 #include "world/common.h"
 #include "world/constantnumbers.h"
 #include "world/matlabfunctions.h"
+#include "world/random_generator.hpp"
+
+namespace wmi = world::modified::internal;
 
 namespace {
 
 static void GetNoiseSpectrum(int noise_size, int fft_size,
-    const ForwardRealFFT *forward_real_fft) {
+    const ForwardRealFFT *forward_real_fft, wmi::RandomGenerator &wmi_rand) {
   double average = 0.0;
   for (int i = 0; i < noise_size; ++i) {
-    forward_real_fft->waveform[i] = randn();
+    forward_real_fft->waveform[i] = wmi_rand();
     average += forward_real_fft->waveform[i];
   }
 
@@ -48,8 +55,9 @@ static void GetAperiodicResponse(int noise_size, int fft_size,
     const double *spectrum, const double *aperiodic_ratio, double current_vuv,
     const ForwardRealFFT *forward_real_fft,
     const InverseRealFFT *inverse_real_fft,
-    const MinimumPhaseAnalysis *minimum_phase, double *aperiodic_response) {
-  GetNoiseSpectrum(noise_size, fft_size, forward_real_fft);
+    const MinimumPhaseAnalysis *minimum_phase, double *aperiodic_response,
+    wmi::RandomGenerator &wmi_rand) {
+  GetNoiseSpectrum(noise_size, fft_size, forward_real_fft, wmi_rand);
 
   if (current_vuv != 0.0)
     for (int i = 0; i <= minimum_phase->fft_size / 2; ++i)
@@ -264,7 +272,7 @@ static void GetOneFrameSegment(int noise_size, int current_location,
   // Synthesis of the aperiodic response
   GetAperiodicResponse(noise_size, synth->fft_size, spectral_envelope,
       aperiodic_ratio, current_vuv, &synth->forward_real_fft,
-      &synth->inverse_real_fft, &synth->minimum_phase, aperiodic_response);
+      &synth->inverse_real_fft, &synth->minimum_phase, aperiodic_response, synth->random_generator);
 
   double sqrt_noise_size = sqrt(static_cast<double>(noise_size));
   for (int i = 0; i < synth->fft_size; ++i)
@@ -468,6 +476,7 @@ void InitializeSynthesizer(int fs, double frame_period, int fft_size,
   synth->dc_remover = new double[synth->fft_size / 2];
 
   // Initilize internal parameters
+  synth->random_generator = wmi::RandomGenerator();
   RefreshSynthesizer(synth);
 
   InitializeMinimumPhaseAnalysis(fft_size, &synth->minimum_phase);
@@ -536,6 +545,7 @@ void RefreshSynthesizer(WorldSynthesizer *synth) {
   for (int i = 0; i < synth->buffer_size * 2 + synth->fft_size; ++i)
     synth->buffer[i] = 0;
   GetDCRemover(synth->fft_size / 2, synth->dc_remover);
+  synth->random_generator.reseed();
 }
 
 void DestroySynthesizer(WorldSynthesizer *synth) {

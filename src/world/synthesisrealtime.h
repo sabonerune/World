@@ -3,11 +3,16 @@
 // Author: mmorise [at] meiji.ac.jp (Masanori Morise)
 // Last update: 2021/02/15
 //-----------------------------------------------------------------------------
+/*
+SPDX-FileCopyrightText: (c) 2024, sabonerune
+SPDX-License-Identifier: 0BSD
+*/
 #ifndef WORLD_SYNTHESISREALTIME_H_
 #define WORLD_SYNTHESISREALTIME_H_
 
 #include "world/common.h"
 #include "world/macrodefinitions.h"
+#include "world/random_generator.hpp"
 
 WORLD_BEGIN_C_DECLS
 
@@ -71,6 +76,8 @@ typedef struct {
   MinimumPhaseAnalysis minimum_phase;
   InverseRealFFT inverse_real_fft;
   ForwardRealFFT forward_real_fft;
+  // random
+  world::modified::internal::RandomGenerator random_generator;
 } WorldSynthesizer;
 
 //-----------------------------------------------------------------------------
