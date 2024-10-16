@@ -12,7 +12,7 @@ SPDX-License-Identifier: 0BSD
 
 #include "world/common.h"
 #include "world/macrodefinitions.h"
-#include "world/random_generator.hpp"
+#include "world/matlabfunctions.h"
 
 WORLD_BEGIN_C_DECLS
 
@@ -72,12 +72,12 @@ typedef struct {
 
   double *impulse_response;
 
+  RandnState randn_state;
+
   // FFT
   MinimumPhaseAnalysis minimum_phase;
   InverseRealFFT inverse_real_fft;
   ForwardRealFFT forward_real_fft;
-  // random
-  world::modified::internal::RandomGenerator random_generator;
 } WorldSynthesizer;
 
 //-----------------------------------------------------------------------------

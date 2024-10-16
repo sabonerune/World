@@ -14,7 +14,6 @@ cmake_minimum_required(VERSION 3.1...3.20)
 # Build Options
 option(WORLD_BUILD_TESTS "Set to ON to build tests" OFF)
 option(WORLD_BUILD_EXAMPLES "Set to ON to build examples" ON)
-option(WORLD_MODIFIED_ENABLE_TESTS "Set to ON to enable tests for modified" OFF)
 
 # use git version as library version
 find_package(Git QUIET)
@@ -56,8 +55,6 @@ add_library(world STATIC
         src/stonemask.cpp
         src/synthesis.cpp
         src/synthesisrealtime.cpp
-        src/world/random_generator.hpp
-        src/random_generator.cpp
         )
 
 add_library(world_tool STATIC
@@ -66,6 +63,8 @@ add_library(world_tool STATIC
         tools/audioio.cpp
         tools/parameterio.cpp
         )
+
+target_compile_features(world PUBLIC cxx_std_11)
 
 add_library(world::core ALIAS world)
 add_library(world::tool ALIAS world_tool)
@@ -127,9 +126,4 @@ endif ()
 
 if(WORLD_BUILD_EXAMPLES)
     add_subdirectory(examples)
-endif()
-
-if(WORLD_MODIFIED_ENABLE_TESTS)
-    enable_testing()
-    add_subdirectory(test_modified)
 endif()
