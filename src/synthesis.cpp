@@ -6,6 +6,10 @@
 // Voice synthesis based on f0, spectrogram and aperiodicity.
 // forward_real_fft, inverse_real_fft and minimum_phase are used to speed up.
 //-----------------------------------------------------------------------------
+/*
+SPDX-FileCopyrightText: (c) 2024, sabonerune
+SPDX-License-Identifier: 0BSD
+*/
 #include "world/synthesis.h"
 
 #include <math.h>

@@ -1,3 +1,11 @@
+# WORLD Modified
+
+This repository was modified for [wwopy](https://github.com/sabonerune/wwopy).
+
+Modified code is covered by the [BSD Zero Clause License](LICENSE_MODIFIED.txt).
+
+Below is the original README.
+
 # WORLD - a high-quality speech analysis, manipulation and synthesis system
 
 WORLD is free software for high-quality speech analysis, manipulation and synthesis.
