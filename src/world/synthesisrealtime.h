@@ -3,11 +3,16 @@
 // Author: mmorise [at] meiji.ac.jp (Masanori Morise)
 // Last update: 2021/02/15
 //-----------------------------------------------------------------------------
+/*
+SPDX-FileCopyrightText: (c) 2024, sabonerune
+SPDX-License-Identifier: 0BSD
+*/
 #ifndef WORLD_SYNTHESISREALTIME_H_
 #define WORLD_SYNTHESISREALTIME_H_
 
 #include "world/common.h"
 #include "world/macrodefinitions.h"
+#include "world/matlabfunctions.h"
 
 WORLD_BEGIN_C_DECLS
 
@@ -66,6 +71,8 @@ typedef struct {
   int *number_of_pulses;
 
   double *impulse_response;
+
+  RandnState randn_state;
 
   // FFT
   MinimumPhaseAnalysis minimum_phase;
