@@ -14,10 +14,6 @@
 //          different from the implementation in synthesis.cpp. The sound
 //          quality is almost all the same in both implementations.
 //-----------------------------------------------------------------------------
-/*
-SPDX-FileCopyrightText: (c) 2024, sabonerune
-SPDX-License-Identifier: 0BSD
-*/
 #include "world/synthesisrealtime.h"
 
 #include <math.h>

@@ -5,10 +5,6 @@
 //
 // Spectral envelope estimation on the basis of the idea of CheapTrick.
 //-----------------------------------------------------------------------------
-/*
-SPDX-FileCopyrightText: (c) 2024, sabonerune
-SPDX-License-Identifier: 0BSD
-*/
 #include "world/cheaptrick.h"
 
 #include <math.h>

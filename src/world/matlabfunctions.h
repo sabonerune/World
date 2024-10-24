@@ -3,10 +3,6 @@
 // Author: mmorise [at] meiji.ac.jp (Masanori Morise)
 // Last update: 2021/02/15
 //-----------------------------------------------------------------------------
-/*
-SPDX-FileCopyrightText: (c) 2024, sabonerune
-SPDX-License-Identifier: 0BSD
-*/
 #ifndef WORLD_MATLABFUNCTIONS_H_
 #define WORLD_MATLABFUNCTIONS_H_
 

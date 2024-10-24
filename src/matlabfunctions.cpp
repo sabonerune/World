@@ -12,11 +12,6 @@
 //   The functions wavread() and wavwrite() were removed to the /src.
 //   they were moved to the test/audioio.cpp. (2016/01/28)
 //-----------------------------------------------------------------------------
-/*
-SPDX-FileCopyrightText: (c) 2024, sabonerune
-SPDX-License-Identifier: 0BSD
-*/
-
 #include "world/matlabfunctions.h"
 
 #include <math.h>
